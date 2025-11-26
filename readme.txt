@@ -1,34 +1,45 @@
 === BLOGthemeWP ===
-Contributors: blogthemewp
+Contributors: bobeec
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 8.0
-Stable tag: 0.1.0
+Stable tag: 0.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A minimalist WordPress theme focused on writing and reading, inspired by note.com.
+A minimal WordPress blog theme focused on writing and reading.
 
 == Description ==
 
-BLOGthemeWP is an extremely simplified WordPress blog theme that pursues "writing and being read," just like note.com.
+BLOGthemeWP is an extremely simple WordPress blog theme that focuses on "writing and reading."
 
 = Features =
 
-* **Minimal Customization** - Only 3 customizable elements: main color, site icon, and header image
-* **Simplified Editor** - Only essential blocks are available for a distraction-free writing experience
-* **SEO Ready** - Automatic meta descriptions, Open Graph tags, Twitter Cards, and JSON-LD structured data
-* **Dark Mode** - Automatic dark mode based on OS settings
-* **Responsive** - Mobile-first design for optimal reading experience on any device
-* **Accessibility Ready** - WCAG compliant with proper heading structure and skip links
+* **Minimal Customization** - Display toggle options only, no complex settings
+* **Simplified Editor** - Only essential blocks for distraction-free writing
+* **SEO Ready** - Built-in meta descriptions, Open Graph, Twitter Cards, JSON-LD, canonical URLs, and breadcrumbs with structured data
+* **Responsive** - Mobile-first design for optimal reading on any device
+* **Accessibility Ready** - Skip links, keyboard navigation, proper heading structure, and link underlines
 
-= Customization =
+= Built-in SEO Features =
 
-Navigate to Appearance > Customize > BLOGthemeWP Settings to configure:
+* Meta description (auto-generated from excerpt)
+* Open Graph tags for social sharing
+* Twitter Card support
+* JSON-LD structured data (Article schema)
+* Canonical URL output
+* Breadcrumb navigation with Schema.org markup
 
-1. **Main Color** - Accent color for links and buttons
-2. **Site Icon** - Displayed in header (512x512px recommended)
-3. **Header Image** - Cover image for homepage and archives
+= Display Options =
+
+Navigate to Appearance > BLOGthemeWP to configure what to show:
+
+* Header, Site Icon, Site Title, Navigation
+* Post Date, Modified Date, Author, Reading Time
+* Categories, Tags, Author Box
+* Post Navigation, Comments
+* Footer Archives (Yearly, Monthly, Categories)
+* Breadcrumb
 
 == Installation ==
 
@@ -46,29 +57,62 @@ By design! BLOGthemeWP focuses on content, not design decisions. The typography,
 
 The theme intentionally limits available blocks to maintain simplicity. If you need more blocks, you can modify the `blogthemewp_allowed_block_types` function in functions.php.
 
-= Does this theme support WooCommerce? =
+= Does this theme need SEO plugins? =
 
-No. BLOGthemeWP is designed exclusively for blogs and does not support e-commerce functionality.
+No. BLOGthemeWP has built-in SEO features including meta descriptions, OGP, Twitter Cards, JSON-LD structured data, canonical URLs, and breadcrumbs. However, for sitemaps, we recommend using the XML Sitemaps plugin.
 
 == Changelog ==
 
+= 0.4.2 =
+* Improved keyboard focus styles for accessibility
+* Updated tags (removed accessibility-ready, added custom-logo)
+* Updated readme.txt with complete resource licenses
+
+= 0.4.1 =
+* Added English (en_US) translation
+* Updated POT template file
+
+= 0.4.0 =
+* Added breadcrumb navigation with Schema.org structured data
+* Added canonical URL output
+* Added modified date display option
+* Reorganized dashboard widget with plugin suggestions
+
+= 0.3.0 =
+* Added footer archive display options (yearly, monthly, category)
+* Updated dashboard widget with detailed plugin information
+
+= 0.2.3 =
+* Fixed comment display error
+
+= 0.2.2 =
+* Fixed Theme Check required errors
+* Added wp_link_pages support
+* Added theme supports: wp-block-styles, align-wide, custom-logo
+* Added required CSS classes
+
+= 0.2.1 =
+* Fixed display toggle functionality
+* Simplified settings to toggle-only system
+
 = 0.1.0 =
 * Initial release
-* Minimal design inspired by note.com
-* SEO optimization (meta tags, OGP, JSON-LD)
-* Dark mode support
-* Simplified block editor
-* Responsive design
 
 == Resources ==
 
-* Normalize.css, (C) 2012-2018 Nicolas Gallagher and Jonathan Neal, MIT License
-* System font stack based on GitHub's font stack
+= Google Fonts =
+Noto Sans JP
+License: SIL Open Font License, 1.1
+Source: https://fonts.google.com/specimen/Noto+Sans+JP
+License URL: https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+
+= Screenshot =
+The screenshot image was created by the theme author and is released under GPLv2 or later.
 
 == Copyright ==
 
-BLOGthemeWP WordPress Theme, (C) 2024 BLOGthemeWP Team
-BLOGthemeWP is distributed under the terms of the GNU GPL
+BLOGthemeWP WordPress Theme, (C) 2024 bobeec
+BLOGthemeWP is distributed under the terms of the GNU GPL v2 or later.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

@@ -2,7 +2,7 @@
 # This file is distributed under the GNU GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: BLOGthemeWP 0.4.0\n"
+"Project-Id-Version: BLOGthemeWP 0.4.2\n"
 "Report-Msgid-Bugs-To: https://github.com/bobeec/BLOGthemeWP/issues\n"
 "POT-Creation-Date: 2024-11-26 00:00:00+00:00\n"
 "MIME-Version: 1.0\n"

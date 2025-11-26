@@ -4,14 +4,14 @@ Theme URI: https://github.com/bobeec/BLOGthemeWP
 Author: bobeec
 Author URI: https://github.com/bobeec
 Description: A minimal blog theme focused on writing and reading. Customization is limited to display toggles only. Clean, simple, and distraction-free.
-Version: 0.4.1
+Version: 0.4.2
 Tested up to: 6.4
 Requires at least: 6.0
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: blogthemewp
-Tags: blog, one-column, editor-style, featured-images, translation-ready, accessibility-ready
+Tags: blog, one-column, custom-logo, editor-style, featured-images, translation-ready
 
 BLOGthemeWP - Write. Read. That's it.
 */
@@ -723,6 +723,30 @@ a.page-numbers:hover {
 
 .skip-link:focus {
     top: 0;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
 }
 
 /* ==========================================================================
