@@ -6,6 +6,8 @@
  */
 
 get_header();
+
+blogthemewp_breadcrumb();
 ?>
 
 <div class="error-404">

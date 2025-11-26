@@ -132,3 +132,153 @@ function blogthemewp_pagination() {
         'next_text' => '&rarr;',
     ) );
 }
+
+/**
+ * パンくずリスト（構造化データ付き）
+ */
+function blogthemewp_breadcrumb() {
+    if ( ! blogthemewp_show( 'show_breadcrumb' ) ) return;
+    if ( is_front_page() ) return;
+    
+    $items = array();
+    $position = 1;
+    
+    // ホーム
+    $items[] = array(
+        'name' => __( 'ホーム', 'blogthemewp' ),
+        'url'  => home_url( '/' ),
+    );
+    
+    if ( is_single() ) {
+        // カテゴリー（最初の1つ）
+        $categories = get_the_category();
+        if ( ! empty( $categories ) ) {
+            $cat = $categories[0];
+            // 親カテゴリーがあれば追加
+            if ( $cat->parent ) {
+                $parent = get_category( $cat->parent );
+                $items[] = array(
+                    'name' => $parent->name,
+                    'url'  => get_category_link( $parent->term_id ),
+                );
+            }
+            $items[] = array(
+                'name' => $cat->name,
+                'url'  => get_category_link( $cat->term_id ),
+            );
+        }
+        // 現在の記事
+        $items[] = array(
+            'name' => get_the_title(),
+            'url'  => '',
+        );
+    } elseif ( is_page() ) {
+        // 親ページがあれば追加
+        global $post;
+        if ( $post->post_parent ) {
+            $ancestors = array_reverse( get_post_ancestors( $post->ID ) );
+            foreach ( $ancestors as $ancestor_id ) {
+                $items[] = array(
+                    'name' => get_the_title( $ancestor_id ),
+                    'url'  => get_permalink( $ancestor_id ),
+                );
+            }
+        }
+        // 現在のページ
+        $items[] = array(
+            'name' => get_the_title(),
+            'url'  => '',
+        );
+    } elseif ( is_category() ) {
+        $cat = get_queried_object();
+        if ( $cat->parent ) {
+            $parent = get_category( $cat->parent );
+            $items[] = array(
+                'name' => $parent->name,
+                'url'  => get_category_link( $parent->term_id ),
+            );
+        }
+        $items[] = array(
+            'name' => $cat->name,
+            'url'  => '',
+        );
+    } elseif ( is_tag() ) {
+        $items[] = array(
+            'name' => single_tag_title( '', false ),
+            'url'  => '',
+        );
+    } elseif ( is_date() ) {
+        if ( is_year() ) {
+            $items[] = array(
+                'name' => get_the_date( 'Y年' ),
+                'url'  => '',
+            );
+        } elseif ( is_month() ) {
+            $items[] = array(
+                'name' => get_the_date( 'Y年n月' ),
+                'url'  => '',
+            );
+        } elseif ( is_day() ) {
+            $items[] = array(
+                'name' => get_the_date( 'Y年n月j日' ),
+                'url'  => '',
+            );
+        }
+    } elseif ( is_author() ) {
+        $items[] = array(
+            'name' => get_the_author(),
+            'url'  => '',
+        );
+    } elseif ( is_search() ) {
+        $items[] = array(
+            'name' => sprintf( __( '「%s」の検索結果', 'blogthemewp' ), get_search_query() ),
+            'url'  => '',
+        );
+    } elseif ( is_404() ) {
+        $items[] = array(
+            'name' => __( 'ページが見つかりません', 'blogthemewp' ),
+            'url'  => '',
+        );
+    }
+    
+    // HTML出力
+    echo '<nav class="breadcrumb" aria-label="' . esc_attr__( 'パンくずリスト', 'blogthemewp' ) . '">';
+    echo '<ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">';
+    
+    foreach ( $items as $index => $item ) {
+        $position = $index + 1;
+        $is_last = ( $index === count( $items ) - 1 );
+        
+        echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+        
+        if ( ! $is_last && $item['url'] ) {
+            echo '<a href="' . esc_url( $item['url'] ) . '" itemprop="item">';
+            echo '<span itemprop="name">' . esc_html( $item['name'] ) . '</span>';
+            echo '</a>';
+        } else {
+            echo '<span itemprop="name">' . esc_html( $item['name'] ) . '</span>';
+        }
+        
+        echo '<meta itemprop="position" content="' . esc_attr( $position ) . '">';
+        echo '</li>';
+        
+        if ( ! $is_last ) {
+            echo '<li class="breadcrumb-separator" aria-hidden="true">/</li>';
+        }
+    }
+    
+    echo '</ol>';
+    echo '</nav>';
+}
+
+/**
+ * 更新日表示
+ */
+function blogthemewp_modified_date() {
+    if ( ! blogthemewp_show( 'show_modified_date' ) ) return;
+    if ( get_the_date() === get_the_modified_date() ) return;
+    
+    echo '<time class="entry-modified" datetime="' . esc_attr( get_the_modified_date( 'c' ) ) . '">';
+    echo esc_html__( '更新：', 'blogthemewp' ) . esc_html( get_the_modified_date() );
+    echo '</time>';
+}

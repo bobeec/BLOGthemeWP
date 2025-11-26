@@ -7,6 +7,8 @@
 
 get_header();
 
+blogthemewp_breadcrumb();
+
 while ( have_posts() ) : the_post();
 ?>
 
@@ -16,6 +18,7 @@ while ( have_posts() ) : the_post();
         <h1 class="entry-title"><?php the_title(); ?></h1>
         <div class="entry-meta">
             <?php blogthemewp_posted_on(); ?>
+            <?php blogthemewp_modified_date(); ?>
             <?php blogthemewp_posted_by(); ?>
             <?php blogthemewp_reading_time_display(); ?>
         </div>

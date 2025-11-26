@@ -4,7 +4,7 @@ Theme URI: https://github.com/bobeec/BLOGthemeWP
 Author: bobeec
 Author URI: https://github.com/bobeec
 Description: A minimal blog theme focused on writing and reading. Customization is limited to display toggles only. Clean, simple, and distraction-free.
-Version: 0.3.0
+Version: 0.4.0
 Tested up to: 6.4
 Requires at least: 6.0
 Requires PHP: 8.0
@@ -232,6 +232,47 @@ ul, ol {
 }
 
 /* ==========================================================================
+   Breadcrumb
+   ========================================================================== */
+.breadcrumb {
+    margin-bottom: var(--spacing);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb-item {
+    display: inline;
+}
+
+.breadcrumb-item a {
+    color: var(--color-text-light);
+}
+
+.breadcrumb-item a:hover {
+    color: var(--color-accent);
+}
+
+.breadcrumb-item span {
+    color: var(--color-text-muted);
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: var(--color-text-muted);
+    user-select: none;
+}
+
+/* ==========================================================================
    Single Post
    ========================================================================== */
 .entry-header {
@@ -256,6 +297,10 @@ ul, ol {
 }
 
 .entry-meta a {
+    color: var(--color-text-muted);
+}
+
+.entry-modified {
     color: var(--color-text-muted);
 }
 

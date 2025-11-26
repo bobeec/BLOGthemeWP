@@ -6,6 +6,8 @@
  */
 
 get_header();
+
+blogthemewp_breadcrumb();
 ?>
 
 <header class="page-header" style="text-align: center; margin-bottom: var(--spacing-lg);">

@@ -7,6 +7,8 @@
 
 get_header();
 
+blogthemewp_breadcrumb();
+
 while ( have_posts() ) : the_post();
 ?>
 

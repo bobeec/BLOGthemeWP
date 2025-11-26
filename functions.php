@@ -5,14 +5,14 @@
  * 「書くこと。読んでもらうこと。」
  *
  * @package BLOGthemeWP
- * @version 0.3.0
+ * @version 0.4.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'BLOGTHEMEWP_VERSION', '0.3.0' );
+define( 'BLOGTHEMEWP_VERSION', '0.4.0' );
 define( 'BLOGTHEMEWP_DIR', get_template_directory() );
 define( 'BLOGTHEMEWP_URI', get_template_directory_uri() );
 
@@ -92,6 +92,8 @@ function blogthemewp_get_display_options() {
         'show_archive_yearly'    => array( 'label' => 'フッター：年別アーカイブ', 'default' => false ),
         'show_archive_monthly'   => array( 'label' => 'フッター：月別アーカイブ', 'default' => false ),
         'show_archive_category'  => array( 'label' => 'フッター：カテゴリー', 'default' => false ),
+        'show_breadcrumb'        => array( 'label' => 'パンくずリスト', 'default' => true ),
+        'show_modified_date'     => array( 'label' => '更新日（投稿日と異なる場合）', 'default' => true ),
     );
 }
 
@@ -194,24 +196,70 @@ function blogthemewp_dashboard_widget_content() {
             <li>あとは記事を書くだけ！</li>
         </ol>
         
-        <h4 style="font-size: 13px; font-weight: 600; margin: 16px 0 8px; color: #1d2327;">推奨プラグイン</h4>
-        <ul style="font-size: 13px; color: #50575e; line-height: 1.8; margin: 0; padding-left: 20px;">
-            <li><strong>WP Multibyte Patch</strong> - 日本語の文字数カウント・検索・トラックバックを正確に</li>
-            <li><strong>XML Sitemaps</strong> - 検索エンジン向けサイトマップを自動生成・送信</li>
-            <li><strong>UpdraftPlus</strong> - 記事・設定・画像を自動バックアップ、復元も簡単</li>
-            <li><strong>Akismet</strong> - コメントスパムを自動判定・ブロック</li>
-        </ul>
-        
-        <div style="font-size: 12px; color: #666; margin-top: 16px; padding: 12px; background: #f8f9fa; border-radius: 4px;">
-            <strong style="color: #1d2327;">テーマ内蔵機能</strong>
-            <ul style="margin: 8px 0 0; padding-left: 16px;">
-                <li>SEO対応済み（メタタグ・OGP・構造化データ自動出力）→ SEOプラグイン不要</li>
-                <li>フッターアーカイブ表示 → <a href="<?php echo admin_url( 'themes.php?page=blogthemewp-settings' ); ?>">設定で有効化</a></li>
+        <div style="font-size: 12px; color: #666; margin-top: 16px; padding: 12px; background: #e8f4e8; border-radius: 4px; border-left: 3px solid #4caf50;">
+            <strong style="color: #2e7d32;">✓ テーマ内蔵SEO機能（プラグイン不要）</strong>
+            <ul style="margin: 8px 0 0; padding-left: 16px; color: #50575e;">
+                <li>メタディスクリプション自動生成</li>
+                <li>OGP / Twitter Card 対応</li>
+                <li>JSON-LD構造化データ（Article）</li>
+                <li>canonical URL 出力</li>
+                <li>パンくずリスト（構造化データ付き）</li>
             </ul>
         </div>
         
-        <p style="font-size: 12px; color: #999; margin-top: 12px;">
-            ※ 上記プラグインはWordPress公式ディレクトリから無料でインストールできます。
+        <h4 style="font-size: 13px; font-weight: 600; margin: 16px 0 8px; color: #1d2327;">プラグインの提案</h4>
+        <p style="font-size: 12px; color: #666; margin-bottom: 12px;">以下は必須ではありませんが、サイト運営に役立つプラグインです。</p>
+        
+        <div style="font-size: 12px; color: #50575e; line-height: 1.7;">
+            <details style="margin-bottom: 8px;">
+                <summary style="cursor: pointer; font-weight: 600; padding: 8px; background: #f8f9fa; border-radius: 4px;">📝 日本語対応</summary>
+                <div style="padding: 8px 12px; background: #fff; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 4px 4px;">
+                    <strong>WP Multibyte Patch</strong><br>
+                    日本語の文字数カウント・検索・トラックバックを正確に処理。日本語サイトには必須級。
+                </div>
+            </details>
+            
+            <details style="margin-bottom: 8px;">
+                <summary style="cursor: pointer; font-weight: 600; padding: 8px; background: #f8f9fa; border-radius: 4px;">🔍 SEO・検索エンジン対策</summary>
+                <div style="padding: 8px 12px; background: #fff; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 4px 4px;">
+                    <strong>XML Sitemaps</strong><br>
+                    サイトマップを自動生成・検索エンジンに送信。テーマでは実装が難しい機能。<br><br>
+                    <strong>Site Kit by Google</strong><br>
+                    Search Console・Analytics・AdSense をWordPressから一元管理。アクセス解析に。
+                </div>
+            </details>
+            
+            <details style="margin-bottom: 8px;">
+                <summary style="cursor: pointer; font-weight: 600; padding: 8px; background: #f8f9fa; border-radius: 4px;">🛡️ セキュリティ・バックアップ</summary>
+                <div style="padding: 8px 12px; background: #fff; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 4px 4px;">
+                    <strong>UpdraftPlus</strong><br>
+                    記事・設定・画像を自動バックアップ。クラウド保存・復元も簡単。<br><br>
+                    <strong>Akismet</strong><br>
+                    コメントスパムを自動判定・ブロック。コメント欄を開放するなら必須。
+                </div>
+            </details>
+            
+            <details style="margin-bottom: 8px;">
+                <summary style="cursor: pointer; font-weight: 600; padding: 8px; background: #f8f9fa; border-radius: 4px;">⚡ パフォーマンス</summary>
+                <div style="padding: 8px 12px; background: #fff; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 4px 4px;">
+                    <strong>WP Super Cache / LiteSpeed Cache</strong><br>
+                    ページをキャッシュして高速表示。サーバー環境に合わせて選択。<br><br>
+                    <strong>ShortPixel / Imagify</strong><br>
+                    画像を自動圧縮・WebP変換。ページ読み込み速度を改善。
+                </div>
+            </details>
+            
+            <details style="margin-bottom: 8px;">
+                <summary style="cursor: pointer; font-weight: 600; padding: 8px; background: #f8f9fa; border-radius: 4px;">🔧 サイト管理</summary>
+                <div style="padding: 8px 12px; background: #fff; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 4px 4px;">
+                    <strong>Redirection</strong><br>
+                    URL変更時のリダイレクト管理・404エラー監視。リンク切れ対策に。
+                </div>
+            </details>
+        </div>
+        
+        <p style="font-size: 11px; color: #999; margin-top: 12px;">
+            ※ すべてWordPress公式ディレクトリから無料でインストールできます。
         </p>
     </div>
     
@@ -335,6 +383,24 @@ function blogthemewp_seo_head() {
     }
 }
 add_action( 'wp_head', 'blogthemewp_seo_head', 1 );
+
+/**
+ * Canonical URL出力
+ */
+function blogthemewp_canonical_url() {
+    if ( is_singular() ) {
+        echo '<link rel="canonical" href="' . esc_url( get_permalink() ) . '">' . "\n";
+    } elseif ( is_home() || is_front_page() ) {
+        echo '<link rel="canonical" href="' . esc_url( home_url( '/' ) ) . '">' . "\n";
+    } elseif ( is_category() ) {
+        echo '<link rel="canonical" href="' . esc_url( get_category_link( get_queried_object_id() ) ) . '">' . "\n";
+    } elseif ( is_tag() ) {
+        echo '<link rel="canonical" href="' . esc_url( get_tag_link( get_queried_object_id() ) ) . '">' . "\n";
+    } elseif ( is_author() ) {
+        echo '<link rel="canonical" href="' . esc_url( get_author_posts_url( get_queried_object_id() ) ) . '">' . "\n";
+    }
+}
+add_action( 'wp_head', 'blogthemewp_canonical_url', 1 );
 
 /* Note: Head cleanup (wp_generator, rsd_link, etc.) removed for WordPress.org compliance.
  * These modifications are plugin territory. Use a security plugin if needed. */
