@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'BLOGTHEMEWP_VERSION', '0.2.0' );
+define( 'BLOGTHEMEWP_VERSION', '0.2.1' );
 define( 'BLOGTHEMEWP_DIR', get_template_directory() );
 define( 'BLOGTHEMEWP_URI', get_template_directory_uri() );
 
